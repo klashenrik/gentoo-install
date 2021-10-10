@@ -27,7 +27,7 @@ sfdisk ${DEVICE} << EOF
 ;
 EOF
 
-sfdisk -A ${BOOT_PART}
+#sfdisk -A ${BOOT_PART}
 
 mkfs.ext2 ${BOOT_PART}
 mkfs.ext4 ${ROOT_PART}
@@ -82,7 +82,7 @@ mount /dev/vda1 /boot
 
 emerge-webrsync
 
-eselect profile set default/linux/amd64
+eselect profile set default/linux/amd64/17.1
 
 emerge --verbose --update --deep --newuse @world
 
