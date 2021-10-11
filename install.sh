@@ -56,6 +56,7 @@ COMMON_FLAGS="-march=native -O2 -pipe"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 MAKEOPTS="-j5"
+ACCEPT_LICENSE="* -@EULA"
 EOF
 
 echo "copy dns info"
