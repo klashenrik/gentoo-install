@@ -22,12 +22,10 @@ ROOT_PART=${DEVICE}3
 echo "partition"
 
 sfdisk ${DEVICE} << EOF
-,256M
+,256M,L,*
 ,4G,S
 ;
 EOF
-
-#sfdisk -A ${BOOT_PART}
 
 mkfs.ext2 ${BOOT_PART}
 mkfs.ext4 ${ROOT_PART}
