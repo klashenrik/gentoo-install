@@ -1,5 +1,11 @@
 #!/bin/bash
 set -e
+MOUNT_LOCATION=/mnt/gentoo
+
+DEVICE=/dev/vda
+BOOT_PART=${DEVICE}1
+SWAP_PART=${DEVICE}2
+ROOT_PART=${DEVICE}3
 
 download_stage3() {
   local MIRROR="https://ftp.belnet.be/pub/rsync.gentoo.org/gentoo"
@@ -12,15 +18,8 @@ download_stage3() {
   wget -q --show-progress "$MIRROR/releases/amd64/autobuilds/$LATEST" 
 }
 
-MOUNT_LOCATION=/mnt/gentoo
 
-DEVICE=/dev/vda
-BOOT_PART=${DEVICE}1
-SWAP_PART=${DEVICE}2
-ROOT_PART=${DEVICE}3
-
-echo "partition"
-
+echo "Preparing the disks"
 sfdisk ${DEVICE} << EOF
 ,256M,L,*
 ,4G,S
@@ -32,7 +31,7 @@ mkfs.ext4 ${ROOT_PART}
 mkswap ${SWAP_PART}
 swapon ${SWAP_PART}
 
-echo "mount"
+echo "Mounting the root partition"
 
 mount ${ROOT_PART} ${MOUNT_LOCATION}
 
@@ -125,17 +124,10 @@ rc-update add net.eth0 default
 
 passwd
 
-emerge app-admin/sysklogd
+emerge app-admin/sysklogd sys-process/cronie sys-apps/mlocate sys-fs/e2fsprogs net-misc/dhcpcd
+
 rc-update add sysklogd default
-
-emerge sys-process/cronie
 rc-update add cronie default
-
-emerge sys-apps/mlocate
-
-emerge sys-fs/e2fsprogs
-
-emerge net-misc/dhcpcd
 
 emerge --verbose sys-boot/grub:2
 
