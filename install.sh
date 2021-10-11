@@ -82,7 +82,7 @@ emerge-webrsync
 
 eselect profile set default/linux/amd64/17.1
 
-emerge --verbose --update --deep --newuse @world
+emerge --quiet --update --deep --newuse @world
 
 echo "Europe/Stockholm" > /etc/timezone
 emerge --config sys-libs/timezone-data
@@ -101,10 +101,10 @@ eselect locale set sv_SE.utf8
 
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
-emerge sys-kernel/installkernel-gentoo
-emerge sys-kernel/gentoo-kernel-bin
+emerge --quiet sys-kernel/installkernel-gentoo
+emerge --quiet sys-kernel/gentoo-kernel-bin
 
-emerge sys-kernel/linux-firmware
+emerge --quiet sys-kernel/linux-firmware
 
 cat << EOS > /etc/fstab 
 /dev/vda1  /boot ext2  defaults,noatime  1 2
@@ -124,7 +124,7 @@ rc-update add net.eth0 default
 
 passwd
 
-emerge app-admin/sysklogd sys-process/cronie sys-apps/mlocate sys-fs/e2fsprogs net-misc/dhcpcd
+emerge --quiet app-admin/sysklogd sys-process/cronie sys-apps/mlocate sys-fs/e2fsprogs net-misc/dhcpcd
 
 rc-update add sysklogd default
 rc-update add cronie default
