@@ -129,6 +129,9 @@ emerge --quiet app-admin/sysklogd sys-process/cronie sys-apps/mlocate sys-fs/e2f
 rc-update add sysklogd default
 rc-update add cronie default
 
+# fix broken gettext that fails emerge grub
+perl-cleaner --all
+
 emerge --verbose sys-boot/grub:2
 
 grub-install /dev/vda
