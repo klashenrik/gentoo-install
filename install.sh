@@ -91,6 +91,7 @@ echo "Europe/Stockholm" > /etc/timezone
 emerge --config sys-libs/timezone-data
 
 cat << EOS > /etc/locale.gen
+C.UTF-8 UTF-8
 en_US ISO-8859-1
 en_US.UTF-8 UTF-8
 sv_SE ISO-8859-1
