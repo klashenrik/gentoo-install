@@ -64,7 +64,7 @@ echo "mounting the necessary filesystems"
 mount --types proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
-mount --rbind /run /mnt/gentoo/run
+mount --bind /run /mnt/gentoo/run
 
 
 echo "entering the new environment"
